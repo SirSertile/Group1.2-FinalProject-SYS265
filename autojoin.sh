@@ -6,7 +6,7 @@ if (( $EUID != 0 )); then
 	exit
 fi
 # Parsing options for getopts 
-while getopts "u:d: " option; do
+while getopts "u:d:g: " option; do
 	val=$OPTARG
 	case $option in
 		u)
@@ -15,15 +15,18 @@ while getopts "u:d: " option; do
 		d)
 			domain=$val
 		;;
+		g)
+			groupname=$val
+		;;
 	esac
 done
 # I
 yum install -y realmd samba samba-common oddjob oddjob-mkhomedir sssd
 
-if [ $domain ] && [ $domainadmin ]; then
+if [ $domain ] && [ $domainadmin ] && [ $groupname ]; then
 	realm join --user=$domainadmin@$domain $domain
 	touch /etc/sudoers.d/windowsadmins
-	echo '"'%$domain\Domain Admins'"' ALL=(ALL) ALL > /etc/sudoers.d/windowsadmins
+	echo '"'%$domain\$groupname'"' ALL=(ALL) ALL > /etc/sudoers.d/windowsadmins
 else
 	echo "Make sure you specify the domain with -d and user with -u "
 fi
