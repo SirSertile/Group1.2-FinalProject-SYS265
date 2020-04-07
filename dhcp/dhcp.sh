@@ -10,6 +10,7 @@ if [[ ! $1 ]]; then
 	exit 1
 fi
 if [[ ! $@ =~ "-p" ]]; then
+	echo "Please pass an argument with -p for the server this is configured with."
 	exit 1
 fi
 cd /etc/dhcp/
@@ -23,12 +24,12 @@ while getopts "msp: " option; do
 		;;
 		s)
 			# slave
-			sed -i 's/primary/secondary/g'
+			sed -i 's/primary/secondary/g' dhcpd.conf
 		;;
 		p)
 			# peer thing
-			sed -i "s/PADDRESS/$OPTARG/g"
-			sed -i "s/SADDRESS/$(hostname -I)/g"
+			sed -i "s/PADDRESS/$OPTARG/g" dhcpd.conf
+			sed -i "s/SADDRESS/$(hostname -I)/g" dhcpd.conf
 		;;
 	esac
 done
