@@ -7,7 +7,8 @@ if (( $EUID != 0 )); then
 fi
 if [[ ! $1 ]]; then
 	echo "Please pass an argument, either \n -m for master server or \n -s for slave server."
-fi
+	exit 1
+fi 
 cd /etc/dhcp/
 wget https://raw.githubusercontent.com/SirSertile/Group1.2-FinalProject-SYS265/master/dhcp/dhcpd.conf
 # Parsing options for getopts 
