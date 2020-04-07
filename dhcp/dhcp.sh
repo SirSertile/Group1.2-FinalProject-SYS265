@@ -3,10 +3,13 @@
 # Auto-installs DHCP services
 if (( $EUID != 0 )); then 
 	echo "Run with sudo privileges"
-	exit
+	exit 1
 fi
 if [[ ! $1 ]]; then
 	echo "Please pass an argument, either -m for master server or -s for slave server."
+	exit 1
+fi
+if [[ ! $@ =~ "-p" ]]; then
 	exit 1
 fi
 cd /etc/dhcp/
@@ -25,7 +28,7 @@ while getopts "msp: " option; do
 		p)
 			# peer thing
 			sed -i "s/PADDRESS/$OPTARG/g"
-			sed -i "s/PADDRESS/$OPTARG/g"
+			sed -i "s/SADDRESS/$(hostname -I)/g"
 		;;
 	esac
 done
