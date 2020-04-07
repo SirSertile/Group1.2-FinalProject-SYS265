@@ -5,10 +5,27 @@ if (( $EUID != 0 )); then
 	echo "Run with sudo privileges"
 	exit
 fi
+if [[ ! $1 ]]; then
+	echo "Please pass an argument, either \n -m for master server or \n -s for slave server."
+fi
 cd /etc/dhcp/
 wget https://raw.githubusercontent.com/SirSertile/Group1.2-FinalProject-SYS265/master/dhcp/dhcpd.conf
+# Parsing options for getopts 
+while getopts "ms " option; do
+	case $option in
+		m)
+			# master do nothing
+		;;
+		s)
+			# slave
+			sed -i 's/primary/secondary/g'
+		;;
+	esac
+done
+
 yum install dhcp
 systemctl start dhcpd
 systemctl enable dhcpd
+firewall-cmd --add-port=647/tcp --permanent
 firewall-cmd --add-service=dhcp --permanent
 firewall-cmd --reload
