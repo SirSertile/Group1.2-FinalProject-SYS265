@@ -13,7 +13,7 @@ cd /etc/dhcp/
 mv dhcpd.conf dhcpd.conf.old
 wget https://raw.githubusercontent.com/SirSertile/Group1.2-FinalProject-SYS265/master/dhcp/dhcpd.conf
 # Parsing options for getopts 
-while getopts "ms " option; do
+while getopts "msp: " option; do
 	case $option in
 		m)
 			# master do nothing
@@ -21,6 +21,11 @@ while getopts "ms " option; do
 		s)
 			# slave
 			sed -i 's/primary/secondary/g'
+		;;
+		p)
+			# peer thing
+			sed -i "s/PADDRESS/$OPTARG/g"
+			sed -i "s/PADDRESS/$OPTARG/g"
 		;;
 	esac
 done
