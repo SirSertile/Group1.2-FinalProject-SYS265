@@ -25,6 +25,7 @@ while getopts "msp: " option; do
 		s)
 			# slave
 			sed -i 's/primary/secondary/g' dhcpd.conf
+			sed -i 's/split 128;//g' dhcpd.conf
 		;;
 		p)
 			# peer thing
