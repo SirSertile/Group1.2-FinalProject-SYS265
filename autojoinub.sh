@@ -21,7 +21,7 @@ while getopts "u:d:g: " option; do
 	esac
 done
 # Install required packages
-apt-get install -y realmd samba samba-common oddjob oddjob-mkhomedir sssd
+apt-get install -y realmd samba samba-common oddjob oddjob-mkhomedir sssd sssd-tools libnss-sss libpam-sss adcli
 if [ ! $groupname ]; then
 	groupname='Domain Admins'
 fi 
