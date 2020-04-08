@@ -21,14 +21,14 @@ while getopts "u:d:g: " option; do
 	esac
 done
 # Install required packages
-apt-get install -y realmd samba samba-common oddjob oddjob-mkhomedir sssd sssd-tools libnss-sss libpam-sss adcli
+apt-get install -y realmd samba samba-common oddjob oddjob-mkhomedir sssd sssd-tools libnss-sss libpam-sss adcli packagekit
 if [ ! $groupname ]; then
 	groupname='Domain Admins'
 fi 
 if [ $domain ] && [ $domainadmin ]; then
 	realm join --user=$domainadmin@$domain $domain
 	touch /etc/sudoers.d/windowsadmins
-	echo '"'"%$domain"'\'"$groupname"'"' "ALL=(ALL) ALL" > /etc/sudoers.d/windowsadmins
+	echo '"'"%$domain"'\' "${groupname^^}"'"' "ALL=(ALL) ALL" > /etc/sudoers.d/windowsadmins
 else
 	echo "Make sure you specify the domain with -d and user with -u "
 fi
