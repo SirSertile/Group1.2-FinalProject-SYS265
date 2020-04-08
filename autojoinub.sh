@@ -26,9 +26,9 @@ if [ ! $groupname ]; then
 	groupname='Domain Admins'
 fi 
 if [ $domain ] && [ $domainadmin ]; then
-	realm join --user=$domainadmin@$domain $domain
+	realm join --user=$domainadmin@${domain^^} $domain
 	touch /etc/sudoers.d/windowsadmins
-	echo '"'"%$domain"'\' "${groupname^^}"'"' "ALL=(ALL) ALL" > /etc/sudoers.d/windowsadmins
+	echo '"'"%$groupname@${domain^^}"'"' "ALL=(ALL) ALL" > /etc/sudoers.d/windowsadmins
 else
 	echo "Make sure you specify the domain with -d and user with -u "
 fi
