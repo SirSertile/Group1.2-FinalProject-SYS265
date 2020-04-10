@@ -22,7 +22,7 @@ while getopts "is:d " option; do
 		;;
 		s)	
 			# sets up deployer remotely
-			script='sudo adduser deployer;
+			script='sudo adduser deployer; echo "password" | sudo passwd deployer --stdin
 			sudo echo -e "deployer \t ALL=(ALL) \t NOPASSWD:ALL" | sudo tee /etc/sudoers.d/deployer'
 			ssh -tt -o StrictHostKeyChecking=no -l $(logname) $val "$script"
 			# copies SSH ID
