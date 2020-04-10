@@ -15,17 +15,18 @@ while getopts "is:d " option; do
 			apt-get update -y
 			apt-get install sshpass ansible python-pip python-setuptools -y
 			pip install wheel pywinrm pywinrm[kerberos]
-			ssh-keygen -t rsa
+			ssh-keygen -t rsa id_rsa.pub
 			mkdir -p ansible/roles
 			touch ansible/roles/inventory.txt
 			exit 0
 		;;
 		s)	
-			script='adduser deployer;
-			echo -e "deployer \t ALL=(ALL) \t NOPASSWD:ALL" | tee /etc/sudoers.d/deployer'
-			ssh -o StrictHostKeyChecking=no -l $(whoami) $val "$script"
+			# sets up deployer remotely
+			script='sudo adduser deployer;
+			sudo echo -e "deployer \t ALL=(ALL) \t NOPASSWD:ALL" | sudo tee /etc/sudoers.d/deployer'
+			ssh -o StrictHostKeyChecking=no -l $(logname) $val "$script"
 			# copies SSH ID
-			ssh-copy-id /home/deployer/.ssh/id_rsa.pub deployer@$val
+			ssh-copy-id -i /home/deployer/.ssh/id_rsa.pub deployer@$val
 		;;
 		d)
 			# sets up deployer account
