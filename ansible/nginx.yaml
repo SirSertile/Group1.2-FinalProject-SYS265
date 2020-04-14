@@ -3,17 +3,12 @@
     hosts: util 
     become: true
     vars: 
-       nginx_service_state: started
-    nginx_service_enabled: yes
+      nginx_service_state: started
+      nginx_service_enabled: yes
     roles:
     - geerlingguy.nginx
-
-  - name: Opening Firewall port 80
-    become: true
-    hosts: util
-    command: sudo firewall-cmd --add-port:80/tcp --permanent
-
-  - name: Reloading firewall
-    become: true
-    hosts: util
-    command: sudo firewall-cmd --reload
+    task:
+    - name: Opening Firewall port 80
+      command: sudo firewall-cmd --add-port:80/tcp --permanent
+    - name: Reloading firewall
+      command: sudo firewall-cmd --reload
