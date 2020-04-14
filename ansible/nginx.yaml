@@ -4,7 +4,7 @@
     become: true
     vars: 
        nginx_service_state: started
-		nginx_service_enabled: yes
+    nginx_service_enabled: yes
     roles:
     - geerlingguy.nginx
 
