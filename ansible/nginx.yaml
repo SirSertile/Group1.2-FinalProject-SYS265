@@ -9,6 +9,8 @@
     - geerlingguy.nginx
     task:
     - name: Opening Firewall port 80
-      command: sudo firewall-cmd --add-port:80/tcp --permanent
+      become: true
+      command: firewall-cmd --add-port:80/tcp --permanent
     - name: Reloading firewall
-      command: sudo firewall-cmd --reload
+      become: true
+      command: firewall-cmd --reload
