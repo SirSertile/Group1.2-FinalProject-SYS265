@@ -15,6 +15,7 @@ while getopts "is:d " option; do
 			apt-get update -y
 			apt-get install sshpass ansible python-pip python-setuptools -y
 			pip install wheel pywinrm pywinrm[kerberos]
+			mkdir -p /home/deployer/.ssh
 			ssh-keygen -t rsa -f /home/deployer/.ssh/id_rsa
 			mkdir -p ansible/roles
 			touch ansible/roles/inventory.txt
