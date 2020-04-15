@@ -21,11 +21,14 @@
     become: true
     tasks: 
       - name: Create a user
-        become: true
-        command: adduser Devin
-      - name: Set a temporary password (DEVINpass) and password policy
         become: true 
-        shell: echo "DEVINpass" | passwd Devin -e
+        user: 
+          name: Devin
+          shell: /bin/bash
+      - name: Unlock the password
+        become: true
+        command: passwd -d Devin -e
+
         
   - name: Create a domain user
     hosts: dc
@@ -35,7 +38,7 @@
           name: Devin
           firstname: Devin
           surname: Paden
-          password: DEVINpass
+          password: NIVEDpass1!
           state: present
           domain_username: GROUP11.LOCAL\g11adm
           domain_password: ADMpass1
