@@ -27,7 +27,7 @@
           shell: /bin/bash
       - name: Unlock the password
         become: true
-        command: passwd -d Devin -e
+        command: echo "password" | passwd Devin -e
 
         
   - name: Create a domain user
