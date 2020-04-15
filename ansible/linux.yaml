@@ -31,12 +31,12 @@
     become: true
     tasks: 
       - name: Create a user
-       win_domain_user:
-       name: Devin
-       firstname: Devin
-       surname: Paden
-       password: DEVINpass
-       state: present
-       domain_username: GROUP11.LOCAL\g11adm
-       domain_password: ADMpass1
-       domain_server: GROUP11.LOCAL
+        win_domain_user:
+          name: Devin
+          firstname: Devin
+          surname: Paden
+          password: DEVINpass
+          state: present
+          domain_username: GROUP11.LOCAL\g11adm
+          domain_password: ADMpass1
+          domain_server: GROUP11.LOCAL
