@@ -1,0 +1,21 @@
+[fw]
+  fw
+[dc]
+  dc1 ansible_user=g11adm@group11.local ansible_password=ADMpass1 ansible_connection=winrm ansible_port=5986 ansible_winrm_server_cert_validation=ignore
+  dc2 ansible_user=g11adm@group11.local ansible_password=ADMpass1 ansible_connection=winrm ansible_port=5986 ansible_winrm_server_cert_validation=ignore
+[dhcp]
+  dhcp1
+  dhcp2
+[util]
+  util
+[linux]
+  dhcp1
+  dhcp2
+  util
+[centos]
+  dhcp1
+  dhcp2
+  util
+[ubuntu]
+  mgmt2
+
