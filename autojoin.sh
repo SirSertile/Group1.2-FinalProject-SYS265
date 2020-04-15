@@ -1,6 +1,6 @@
 #!/bin/bash
 # Written by David Serate
-# Auto-joins to a domain 
+# Auto-joins centos to a domain 
 if (( $EUID != 0 )); then 
 	echo "Run with sudo privileges"
 	exit
@@ -20,7 +20,7 @@ while getopts "u:d:g: " option; do
 		;;
 	esac
 done
-# I
+# Install required packages
 yum install -y realmd samba samba-common oddjob oddjob-mkhomedir sssd
 if [ ! $groupname ]; then
 	groupname='Domain Admins'

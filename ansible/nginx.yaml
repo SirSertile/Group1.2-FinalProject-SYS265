@@ -7,10 +7,10 @@
       nginx_service_enabled: yes
     roles:
     - geerlingguy.nginx
-    task:
+    tasks:
     - name: Opening Firewall port 80
       become: true
-      command: firewall-cmd --add-port:80/tcp --permanent
+      command: firewall-cmd --add-port=80/tcp --permanent
     - name: Reloading firewall
       become: true
       command: firewall-cmd --reload
